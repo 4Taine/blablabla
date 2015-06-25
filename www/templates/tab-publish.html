@@ -5,15 +5,49 @@
  		</div>
     </ion-nav-buttons>
   <ion-content>
-    <div class="list">          
-      <label class="item item-input item-floating-label">
-        <span class="input-label">De</span>
-        <input type="text" ng-model="inputDepart" name="depart" placeholder="De">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label">À</span>
-        <input type="text" ng-model="inputArrive" name="arrive" placeholder="À">
-      </label>
+
+    <div class="item item-divider">
+      Départ
+    </div>
+    <label class="item item-input">
+      <span class="input-label" style="width:10%;">De</span>
+      <input type="text" ng-model="inputDepart" name="depart">
+    </label>
+    <div class="row">
+      <div class="col col-67">
+        <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+        </ionic-datepicker>
+      </div>     
+      <div class="col">
+        <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">    
+          <button class="button button-full button-positive"> {{Math.floor(slots.epochTime/3600) | numberFixedLen:2}}h{{(slots.epochTime/3600%1)*60  | numberFixedLen:2}} </button>
+        </ionic-timepicker>
+      </div>     
+    </div>
+
+    <div class="item item-divider">
+      Arrivé
+    </div>
+    <label class="item item-input">
+      <span class="input-label" style="width:10%;">À</span>
+      <input type="text" ng-model="inputArrive" name="arrive">
+    </label>
+    <div class="row">
+      <div class="col col-67">
+        <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+        </ionic-datepicker>
+      </div>     
+      <div class="col">
+        <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">    
+          <button class="button button-full button-positive"> {{Math.floor(slots.epochTime/3600) | numberFixedLen:2}}h{{(slots.epochTime/3600%1)*60  | numberFixedLen:2}} </button>
+        </ionic-timepicker>
+      </div> 
+    </div>
+
+    <div class="item item-divider">
+      Réglages
     </div>
     <ion-list>
       <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAutoroute">
@@ -24,13 +58,9 @@
       </ion-toggle>
     </ion-list>
 
-    <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
-      <button class="button button-block button-positive"> départ le : {{ currentDate | date:'dd - MMMM - yyyy' }}</button>
-    </ionic-datepicker>
-
-    <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
-      <button class="button button-block button-positive"> arrivé le : {{ currentDate | date:'dd - MMMM - yyyy' }}</button>
-    </ionic-datepicker>
+    <button class="button button-full button-calm" ng-click="save()">
+      Enregistrer
+    </button>
 
   </ion-content>
 </ion-view>

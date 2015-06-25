@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ionic-datepicker'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ionic-datepicker','ionic-timepicker'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -72,4 +72,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/search');
 
-});
+})
+.filter('numberFixedLen', function () {
+        return function (n, len) {
+            var num = parseInt(n, 10);
+            len = parseInt(len, 10);
+            if (isNaN(num) || isNaN(len)) {
+                return n;
+            }
+            num = ''+num;
+            while (num.length < len) {
+                num = '0'+num;
+            }
+            return num;
+        };
+    });
