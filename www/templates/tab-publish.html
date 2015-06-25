@@ -5,19 +5,15 @@
  		</div>
     </ion-nav-buttons>
   <ion-content>
-    <div>
-        <form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
-          <div class="list">          
-          <label class="item item-input item-floating-label">
-            <span class="input-label">De</span>
-            <input type="text" ng-model="inputDepart" name="depart" placeholder="De">
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="input-label">À</span>
-            <input type="text" ng-model="inputArrive" name="arrive" placeholder="À">
-          </label>
-        </div>
-      </form>
+    <div class="list">          
+      <label class="item item-input item-floating-label">
+        <span class="input-label">De</span>
+        <input type="text" ng-model="inputDepart" name="depart" placeholder="De">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">À</span>
+        <input type="text" ng-model="inputArrive" name="arrive" placeholder="À">
+      </label>
     </div>
     <ion-list>
       <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAutoroute">
@@ -27,5 +23,14 @@
           Allez-retour
       </ion-toggle>
     </ion-list>
+
+    <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
+      <button class="button button-block button-positive"> départ le : {{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+    </ionic-datepicker>
+
+    <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
+      <button class="button button-block button-positive"> arrivé le : {{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+    </ionic-datepicker>
+
   </ion-content>
 </ion-view>

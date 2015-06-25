@@ -11,6 +11,22 @@ angular.module('starter.controllers', [])
     enableAutoroute: true,
     enableAllezRetour: false
   };
+
+  $scope.dateDepart;
+  $scope.dateArrive;
+  $scope.dateDateDepart;
+  $scope.dateDateArrive;
+
+  $scope.currentDate = new Date();
+  $scope.datePickerCallback = function (val) {
+    if(typeof(val)==='undefined'){    
+        console.log('Date not selected');
+    }else{
+        console.log('Selected date is : ', val);
+    }
+  };
+
+
 })
 
 .controller("AccountFormCtrl", function($scope){
