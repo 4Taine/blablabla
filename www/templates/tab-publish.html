@@ -5,10 +5,27 @@
  		</div>
     </ion-nav-buttons>
   <ion-content>
+    <div>
+        <form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
+          <div class="list">          
+          <label class="item item-input item-floating-label">
+            <span class="input-label">De</span>
+            <input type="text" ng-model="inputDepart" name="depart" placeholder="De">
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">À</span>
+            <input type="text" ng-model="inputArrive" name="arrive" placeholder="À">
+          </label>
+        </div>
+      </form>
+    </div>
     <ion-list>
-    <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAutoroute">
-        Autoroute
-    </ion-toggle>
+      <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAutoroute">
+          Autoroute
+      </ion-toggle>
+      <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAllezRetour">
+          Allez-retour
+      </ion-toggle>
     </ion-list>
   </ion-content>
 </ion-view>

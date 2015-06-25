@@ -8,7 +8,8 @@ angular.module('starter.controllers', [])
 
 .controller('PublishCtrl', function($scope) {
   $scope.settings = {
-    enableAutoroute: true
+    enableAutoroute: true,
+    enableAllezRetour: false
   };
 })
 
