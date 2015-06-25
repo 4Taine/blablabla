@@ -1,0 +1,64 @@
+  <ion-modal-view>
+    <ion-header-bar>
+		<a class="button icon-left ion-chevron-left button-clear button-dark" ng-click="closeModal()">Back</a>
+     	<h1 class="title">My Account</h1>
+    </ion-header-bar>
+
+    <ion-content ng-controller="AccountFormCtrl">
+    	<div id="logInForm" ng-show="showLogIn">
+    		<form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
+			    <div class="list">				  
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">e-Mail</span>
+				    <input type="text" ng-model="inputMail" name="email" placeholder="e-Mail">
+				  </label>
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">Password</span>
+				    <input type="password" ng-model="inputPwd" name="password" placeholder="password">
+				  </label>
+				</div>
+				<button type="submit" class="button button-full button-positive" ng-click="logIn()">
+				  Log in
+				</button>
+			</form>
+
+			<button id="switchButtun" class="button button-full button-calm" ng-click="hideForm()">
+			 	Create account
+			</button>
+    	</div>
+    	<div id="signInForm" ng-show="showSignIn">
+    		<form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
+    			<div class="list">
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">First Name</span>
+				    <input type="text" ng-model="inputFirstName" placeholder="First Name">
+				  </label>
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">Last Name</span>
+				    <input type="text" ng-model="inputLastName" placeholder="Last Name">
+				  </label>
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">Email</span>
+				    <input type="text" ng-model="inputMail" placeholder="Email">
+				  </label>
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">Password</span>
+				    <input type="password" ng-model="inputPwd" name="password" placeholder="password">
+				  </label>
+				  <label class="item item-input item-floating-label">
+				    <span class="input-label">Confirm password</span>
+				    <input type="password" ng-model="inputConfirmPwd" name="password" placeholder="password">
+				  </label>
+				</div>				
+				<button type="submit" class="button button-full button-positive">
+				  Sign in
+				</button>
+    		</form>
+
+			<button id="switchButtun" class="button button-full button-calm" ng-click="hideForm()">
+			 	Use an existing account
+			</button>
+    	</div>
+    	
+    </ion-content>
+  </ion-modal-view>
