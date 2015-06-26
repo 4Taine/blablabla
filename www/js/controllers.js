@@ -1,25 +1,125 @@
 angular.module('starter.controllers', [])
 
-.controller('SearchCtrl', function($scope) {})
+.controller('SearchCtrl', function($scope, TrajetsProposes, Users, $ionicPopup) {
+  $scope.dep;
+  $scope.arr;
+  $scope.trajets = TrajetsProposes.all();
+  $scope.showTrajets = true;
+
+
+
+  $scope.rechercheTrajets = function () {
+      console.log("cdfdv");
+        var liste = document.getElementById("listeTraj");
+        liste.style.display = "block";
+  };
+  $scope.reserver = function(trajet){
+        
+        if (Users.isConnected() == true) {
+          console.log("connecté");
+
+            if (TrajetsProposes.getNbPlace(trajet) == 0)
+            {
+              var alertPopup = $ionicPopup.alert({
+                title: 'Reservation impossible',
+                template: 'Il ne reste plus de place'
+                });
+            }else
+            {
+            TrajetsProposes.ajouterReservation(trajet,Users.get());
+              var alertPopup = $ionicPopup.alert({
+                title: 'Trajet réservé',
+                template: 'Votre trajet a été reservé'
+                });}
+        }else
+        {
+              var alertPopup = $ionicPopup.alert({
+                title: 'Reservation impossible',
+                template: 'Vous devez vous connecter ou créer un compte pour pouvoir réserver'
+                });
+        }      
+    };
+
+    $scope.datePickerCallback = function (val) {
+      if(typeof(val)==='undefined'){    
+          console.log('Date not selected');
+      }else{
+          console.log('Current date is : ', new Date());
+          console.log('Selected date is : ', val);
+      }
+    };
+
+})
 
 .controller('MyPathCtrl', function($scope) {
 
 })
 
-.controller('PublishCtrl', function($scope) {
+.controller('PublishCtrl', function($scope, TrajetsProposes, Users) {
   $scope.settings = {
     enableAutoroute: true,
     enableAllezRetour: false
   };
 
-  $scope.inputDepart;
-  $scope.inputArrive;
-  $scope.inputDateDepart;
-  $scope.inputDateArrive;
+  $scope.inputDepartPublish;
+  $scope.inputArrivePublish;
+  $scope.inputDateDepartPublish;
+  $scope.inputDateArrivePublish;
   $scope.inputTimeDepart = new Date().getHours()*3600+3600;
   $scope.inputTimeArrive = new Date().getHours()*3600+7200;
 
+  $scope.inputPlaceDispo = 1;
+  $scope.inputPrix = 10;
+
+
   $scope.Math=Math;
+
+  $scope.prixPlus = function(){
+    $scope.inputPrix = $scope.inputPrix +1;
+    console.log("nouveau prix : " + $scope.inputPrix);
+  }
+
+  $scope.prixMoins = function(){
+    if ($scope.inputPrix > 0){
+      $scope.inputPrix = $scope.inputPrix -1;
+    }    
+    console.log("nouveau prix : " + $scope.inputPrix);
+  }
+
+  $scope.placePlus = function(){
+    $scope.inputPlaceDispo = $scope.inputPlaceDispo +1;    
+    console.log("nouveau nombre de places : " + $scope.inputPlaceDispo);
+  }
+
+  $scope.placeMoins = function(){    
+    if ($scope.inputPlaceDispo > 0){
+      $scope.inputPlaceDispo = $scope.inputPlaceDispo -1;
+    }
+    console.log("nouveau nombre de places : " + $scope.inputPlaceDispo);
+  }
+
+  $scope.publierTrajet = function(){    
+    TrajetsProposes.ajouterTrajet($scope.inputDepartPublish,
+                                  $scope.inputArrivePublish,
+                                  $scope.inputDateDepartPublish,
+                                  $scope.inputDateArrivePublish,
+                                  $scope.inputTimeDepart,
+                                  $scope.inputTimeArrive,
+                                  $scope.inputPrix,
+                                  $scope.inputPlaceDispo,
+                                  $scope.settings.enableAutoroute,
+                                  $scope.settings.enableAllezRetour);
+    $scope.inputDepartPublish = "";
+    $scope.inputArrivePublish = "";
+    $scope.inputDateDepartPublish = new Date();
+    $scope.inputDateArrivePublish = new Date();
+    $scope.inputTimeDepart = 43200;
+    $scope.inputTimeArrive = 46800;
+    $scope.inputPrix = 10;
+    $scope.inputPlaceDispo = 1;
+    $scope.settings.enableAutoroute = true;
+    $scope.settings.enableAllezRetour = false;
+  }
 
   $scope.datePickerCallback = function (val) {
     if(typeof(val)==='undefined'){    

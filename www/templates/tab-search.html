@@ -1,11 +1,42 @@
-<ion-view view-title="Rechercher un trajet">
+<ion-view view-title="Rechercher">
 	<ion-nav-buttons side="primary" >
 		<div ng-controller="AccountCtrl">
      		<a class="button button-clear ion-gear-a" ng-click="openModal()"></a>
  		</div>
     </ion-nav-buttons>
-  <ion-content>
-    <ion-list>
-    </ion-list>
-  </ion-content>
+  <ion-content ng-controller="SearchCtrl">
+    	<div >
+    		<form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
+			    <div class="list">				  
+				  <label class="item item-input">
+    			 	 <input type="text" placeholder="Départ" ng-model="input.depart">
+ 	 			  </label>
+				  <label class="item item-input">
+				    <input type="text" placeholder="Arrivée" ng-model="input.arrive">
+				  </label>
+
+				<ionic-datepicker idate="inputDateDepart" disablepreviousdates="true"  callback="datePickerCallback">
+			      <button class="button button-full button-positive">{{ inputDateDepart | date:'dd - MMMM - yyyy' }}</button>
+			    </ionic-datepicker>
+				<button class="button button-balanced button-block" ng-click="rechercheTrajets()">
+			  		Rechercher
+				</button>
+			</form>
+    	</div>
+    	
+    	<ion-list id="listeTraj" style="display:none">
+	  		<ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="trajet in trajets | filter:input" type="item-text-wrap" >
+	        
+	        <h2>{{trajet.depart}} - {{trajet.arrive}}</h2>
+	        <p>{{trajet.prix}}</p>
+	        <p> {{trajet.nbPlace}} place(s) restante(s)</p>
+	        
+	        <ion-option-button class="button-positive" ng-click="reserver(trajet)">
+	          reserver
+	        </ion-option-button>
+	   
+	      </ion-item>
+      	</ion-list>
+
+    </ion-content>
 </ion-view>

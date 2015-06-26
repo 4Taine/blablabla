@@ -1,1 +1,6 @@
 /* Empty. Add your own CSS if you like */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

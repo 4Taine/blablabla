@@ -4,19 +4,19 @@
      		<a class="button button-clear ion-gear-a" ng-click="openModal()"></a>
  		</div>
     </ion-nav-buttons>
-  <ion-content>
+  <ion-content ng-controller="PublishCtrl">
 
     <div class="item item-divider">
       Départ
     </div>
     <label class="item item-input">
       <span class="input-label" style="width:10%;">De</span>
-      <input type="text" ng-model="inputDepart" name="depart">
+      <input type="text" ng-model="inputDepartPublish" name="depart">
     </label>
     <div class="row">
       <div class="col col-67">
-        <ionic-datepicker idate="inputDateDepart" disablepreviousdates="true"  callback="datePickerCallback">
-          <button class="button button-full button-positive">{{ inputDateDepart | date:'dd - MMMM - yyyy' }}</button>
+        <ionic-datepicker idate="inputDateDepartPublish" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ inputDateDepartPublish | date:'dd - MMMM - yyyy' }}</button>
         </ionic-datepicker>
       </div>     
       <div class="col">
@@ -31,12 +31,12 @@
     </div>
     <label class="item item-input">
       <span class="input-label" style="width:10%;">À</span>
-      <input type="text" ng-model="inputArrive" name="arrive">
+      <input type="text" ng-model="inputArrivePublish" name="arrive">
     </label>
     <div class="row">
       <div class="col col-67">
-        <ionic-datepicker idate="inputDateArrive" disablepreviousdates="true"  callback="datePickerCallback">
-          <button class="button button-full button-positive">{{ inputDateArrive | date:'dd - MMMM - yyyy' }}</button>
+        <ionic-datepicker idate="inputDateArrivePublish" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ inputDateArrivePublish | date:'dd - MMMM - yyyy' }}</button>
         </ionic-datepicker>
       </div>     
       <div class="col">
@@ -49,6 +49,39 @@
     <div class="item item-divider">
       Réglages
     </div>
+
+    <div class="row item-input-inset">
+      <div class="col col-20">
+        Places 
+      </div>
+      <div class="col col-10">
+        <a class="button button-icon icon ion-minus" ng-click="placeMoins()"></a>
+      </div>      
+      <div class="col col-50">
+        <label class="item item-input">
+          <input type="number" ng-model="inputPlaceDispo">
+        </label>
+      </div>
+      <div class="col col-10">
+        <a class="button button-icon icon ion-plus" ng-click="placePlus()"></a>
+      </div>
+    </div>
+    <div class="row item-input-inset" >
+      <div class="col col-20">
+        Prix 
+      </div>
+      <div class="col col-10">
+        <a class="button button-icon icon ion-minus" ng-click="prixMoins()"></a>
+      </div>      
+      <div class="col col-50">
+        <label class="item item-input">
+          <input type="number" ng-model="inputPrix">
+        </label>
+      </div>
+      <div class="col col-10">
+        <a class="button button-icon icon ion-plus" ng-click="prixPlus()"></a>
+      </div>
+    </div>
     <ion-list>
       <ion-toggle toggle-class="toggle-positive" ng-model="settings.enableAutoroute">
           Autoroute
@@ -58,7 +91,7 @@
       </ion-toggle>
     </ion-list>
 
-    <button class="button button-full button-calm" ng-click="save()">
+    <button class="button button-full button-calm" ng-click="publierTrajet()">
       Enregistrer
     </button>
 

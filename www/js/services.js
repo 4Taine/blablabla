@@ -1,5 +1,68 @@
 angular.module('starter.services', [])
+.factory('TrajetsProposes', function() {
 
+  var TrajetsProposes = [{
+    id:0,
+    depart:'aa',
+    arrive:'bb',
+    date:new Date(2015, 6, 21, 12, 00, 0, 0),
+    dateArrive:new Date(2015, 6, 21, 14, 00, 0, 0),
+    heureDepart:43200,
+    heureArrive:46800,
+    prix:'10 €',
+    nbPlace: 0,
+    autoroute:true,
+    allezRetour:false,
+    passagers:[]
+  },
+  {
+    id:1,
+    depart:'Clermont Ferrand',
+    arrive:'Marvejols',
+    date:new Date(2015, 6, 21, 12, 00, 0, 0),
+    dateArrive:new Date(2015, 6, 21, 14, 00, 0, 0),
+    heureDepart:43200,
+    heureArrive:46800,
+    prix:'10 €',
+    nbPlace:3,
+    autoroute:true,
+    allezRetour:false,
+    passagers:[]
+  }
+
+  ];
+
+  return {
+    all: function () {
+      return TrajetsProposes;
+    },
+    ajouterTrajet: function(depart,arrive,date,dateArrive,heureDepart,heureArrive,prix,place,enableAutoroute,enableAllezRetour){
+      TrajetsProposes.push({
+        id:(TrajetsProposes[TrajetsProposes.length-1].id)+1,
+        depart:depart,
+        arrive:arrive,
+        heureDepart:heureDepart,
+        heureArrive:heureArrive,
+        date:date,
+        dateArrive:dateArrive,
+        prix:prix + " €",
+        nbPlace:place,
+        autoroute:enableAutoroute,
+        allezRetour:enableAllezRetour,
+        passagers:[]
+      })
+    },
+    ajouterReservation: function(trajet, user){
+              TrajetsProposes[TrajetsProposes.indexOf(trajet)].passagers.push(user.id);
+              console.log('trajet ajouté');
+              console.log(TrajetsProposes[TrajetsProposes.indexOf(trajet)].passagers);
+            
+        },
+    getNbPlace:function(trajet){
+        TrajetsProposes[TrajetsProposes.indexOf(trajet)].nbPlace;
+    }
+  };
+})
 .factory('Users', function() {
 
   var users =[
