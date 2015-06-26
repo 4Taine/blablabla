@@ -63,6 +63,23 @@ angular.module('starter.services', [])
     }
   };
 })
+.factory('Camera', ['$q', function($q) {
+ 
+  return {
+    getPicture: function(options) {
+      var q = $q.defer();
+      
+      navigator.camera.getPicture(function(result) {
+        // Do any magic you need
+        q.resolve(result);
+      }, function(err) {
+        q.reject(err);
+      }, options);
+      
+      return q.promise;
+    }
+  }
+}])
 .factory('Users', function() {
 
   var users =[
@@ -74,11 +91,27 @@ angular.module('starter.services', [])
       password:"bigpassword",
       birthDate:"1993-06-18T00:00:00.000Z",
       gender:"M",
-      imageSrc:"none.jpg",
+      imageSrc:"img/default_user.jpg",
       dateInscription:"2015-06-03T14:25:08.357Z",
       lastConnection:"2015-06-05T14:25:08.357Z",
       rankUser:"4",
-      rankPower:"9"
+      rankPower:"9",
+      isMale: function(){
+        if(this.gender == "M")
+        {
+          return true;
+        }else{
+          return false;
+        }
+      },
+      isFemale: function(){
+        if(this.gender == "F")
+        {
+          return true;
+        }else{
+          return false;
+        }
+      }
     }
   ]
 
@@ -92,10 +125,10 @@ angular.module('starter.services', [])
           connected = true;
           connectedID=users[i].id;
           users[i].lastConnection = new Date().toJSON();
-          return users[i].id;
+          return users[i];
         }
       }
-      return -1;
+      return null;
     },
     addNewUser: function(firstname,lastname,email,password,birthDate,gender){
       users.push({
@@ -106,7 +139,7 @@ angular.module('starter.services', [])
         password:password,
         birthDate:birthDate,
         gender:gender,
-        imageSrc:"none.jpg",
+        imageSrc:"img/default_user.jpg",
         dateInscription:new Date().toJSON(),
         lastConnection:new Date().toJSON(),
         rankUser:"0",

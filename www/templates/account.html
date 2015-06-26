@@ -76,6 +76,30 @@
    	  </div>
 
       <div ng-show="connected">
+      	<img id="imageUser" src="img/default_user.png" width="100%">
+      	<button class="button button-full button-energized" ng-click="getPhoto()">
+		   Changer d'image
+		</button>
+      	<ul class="list">
+		    <li class="item" ng-if="user.isFemale()">		    	
+		      <i class="icon ion-female"></i> {{user.firstname}} {{user.lastname}}
+		    </li>		    
+		    <li class="item" ng-if="user.isMale()">		    	
+		      <i class="icon ion-male"></i> {{user.firstname}} {{user.lastname}}
+		    </li>		    
+		    <li class="item">
+		      {{user.email}}
+		    </li>
+		    <li class="item">
+		      Née le {{user.birthDate | date:"dd-MM-yyyy"}}
+		    </li>		    
+		    <li class="item">
+		      Covoiture depuis le {{user.dateInscription | date:"dd-MM-yyyy"}}
+		    </li>    
+		    <li class="item">
+		      Derniere connexion le {{user.lastConnection | date:"dd-MM-yyyy"}}
+		    </li>
+		</ul>
       	<button class="button button-full button-calm" ng-click="logOut()">
 		 	Log Out
 		</button>

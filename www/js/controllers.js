@@ -1,5 +1,9 @@
 angular.module('starter.controllers', [])
 
+.config(function($compileProvider){
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+})
+
 .controller('SearchCtrl', function($scope, TrajetsProposes, Users, $ionicPopup) {
   $scope.dep;
   $scope.arr;
@@ -143,7 +147,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller("AccountFormCtrl", function($scope,Users){
+.controller("AccountFormCtrl", function($scope,Users,Camera){
   $scope.showLogIn = true;
   $scope.showSignIn = false;
 
@@ -157,6 +161,7 @@ angular.module('starter.controllers', [])
   $scope.inputGender = "M";
 
   $scope.connected = false;
+  $scope.user = null;
 
   $scope.datePickerCallback = function (val) {
     if(typeof(val)==='undefined'){    
@@ -172,7 +177,7 @@ angular.module('starter.controllers', [])
       $scope.showSignIn = ($scope.showSignIn == false)?true:false;
   };
   $scope.logIn = function(){
-    Users.tryLogin($scope.inputMail,$scope.inputPwd);
+    $scope.user = Users.tryLogin($scope.inputMail,$scope.inputPwd);
     if(Users.isConnected() == true){
       console.log("connection reussie");
       $scope.connected = true;
@@ -194,8 +199,34 @@ angular.module('starter.controllers', [])
   $scope.logOut = function(){
     Users.logOut();
     $scope.connected = false;
+    $scope.user = null;
   }
 
+  /********* Cordova camera *************/
+    $scope.getPhoto = function() {
+      console.log('Getting camera');
+      Camera.getPicture({
+        quality: 75,
+        targetWidth: 320,
+        targetHeight: 320,
+        saveToPhotoAlbum: false
+      }).then(function(imageURI) {
+        console.log(imageURI);
+        user.imageSrc = imageURI;
+      }, function(err) {
+        console.err(err);
+      });
+      /*
+      navigator.camera.getPicture(function(imageURI) {
+        console.log(imageURI);
+      }, function(err) {
+      }, { 
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL
+      });
+      */
+    }
+  /***********************/
 })
 
 .controller('AccountCtrl', function($scope, $ionicModal) {
