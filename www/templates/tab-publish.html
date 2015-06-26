@@ -15,13 +15,13 @@
     </label>
     <div class="row">
       <div class="col col-67">
-        <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
-          <button class="button button-full button-positive">{{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+        <ionic-datepicker idate="inputDateDepart" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ inputDateDepart | date:'dd - MMMM - yyyy' }}</button>
         </ionic-datepicker>
       </div>     
       <div class="col">
-        <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">    
-          <button class="button button-full button-positive"> {{Math.floor(slots.epochTime/3600) | numberFixedLen:2}}h{{(slots.epochTime/3600%1)*60  | numberFixedLen:2}} </button>
+        <ionic-timepicker etime="inputTimeDepart" format="slots.format" step="slots.step" callback="timePickerCallback">    
+          <button class="button button-full button-positive"> {{Math.floor(inputTimeDepart/3600) | numberFixedLen:2}}h{{(inputTimeDepart/3600%1)*60  | numberFixedLen:2}} </button>
         </ionic-timepicker>
       </div>     
     </div>
@@ -35,13 +35,13 @@
     </label>
     <div class="row">
       <div class="col col-67">
-        <ionic-datepicker idate="currentDate" disablepreviousdates="true"  callback="datePickerCallback">
-          <button class="button button-full button-positive">{{ currentDate | date:'dd - MMMM - yyyy' }}</button>
+        <ionic-datepicker idate="inputDateArrive" disablepreviousdates="true"  callback="datePickerCallback">
+          <button class="button button-full button-positive">{{ inputDateArrive | date:'dd - MMMM - yyyy' }}</button>
         </ionic-datepicker>
       </div>     
       <div class="col">
-        <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">    
-          <button class="button button-full button-positive"> {{Math.floor(slots.epochTime/3600) | numberFixedLen:2}}h{{(slots.epochTime/3600%1)*60  | numberFixedLen:2}} </button>
+        <ionic-timepicker etime="inputTimeArrive" format="slots.format" step="slots.step" callback="timePickerCallback">    
+          <button class="button button-full button-positive"> {{Math.floor(inputTimeArrive/3600) | numberFixedLen:2}}h{{(inputTimeArrive/3600%1)*60  | numberFixedLen:2}} </button>
         </ionic-timepicker>
       </div> 
     </div>

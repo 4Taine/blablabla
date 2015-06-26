@@ -8,7 +8,7 @@ angular.module('starter.services', [])
       firstname: "Lucas",
       lastname:"Pouchot",
       email:"lucas.pouchot@gmail.com",
-      password:"0acfe33c3581db13bfae2d18a0e104d4",
+      password:"bigpassword",
       birthDate:"1993-06-18T00:00:00.000Z",
       gender:"M",
       imageSrc:"none.jpg",
@@ -19,14 +19,20 @@ angular.module('starter.services', [])
     }
   ]
 
+  var connected = false;
+  var connectedID = -1;
+
   return {
     tryLogin: function(email,password){
       for (var i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
+        if (users[i].email == email && users[i].password == password) {
+          connected = true;
+          connectedID=users[i].id;
+          users[i].lastConnection = new Date().toJSON();
           return users[i].id;
         }
       }
-      return null;
+      return -1;
     },
     addNewUser: function(firstname,lastname,email,password,birthDate,gender){
       users.push({
@@ -53,10 +59,21 @@ angular.module('starter.services', [])
     all: function() {
       return users;
     },
-    get: function(userId) {
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].id === parseInt(userId)) {
-          return users[i];
+    isConnected:function(){
+      return connected;
+    },
+    logOut: function(){
+      if (connected == true){
+        users[connectedID].lastConnection = new Date().toJSON();
+      }
+      connected = false;
+    },
+    get: function() {
+      if (connected == true){        
+        for (var i = 0; i < users.length; i++) {
+          if (users[i].id == parseInt(connectedID)) {
+            return users[i];
+          }
         }
       }
       return null;

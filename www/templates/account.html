@@ -5,6 +5,8 @@
     </ion-header-bar>
 
     <ion-content ng-controller="AccountFormCtrl">
+
+      <div ng-show="!connected">
     	<div id="logInForm" ng-show="showLogIn">
     		<form METHOD="POST" ENCTYPE="x-www-form-urlencoded">
 			    <div class="list">				  
@@ -41,16 +43,28 @@
 				    <span class="input-label">Email</span>
 				    <input type="text" ng-model="inputMail" placeholder="Email">
 				  </label>
+		      	  <ionic-datepicker idate="inputBirthDate" disablepreviousdates="false"  callback="datePickerCallback">
+		          	<button class="button button-block button-stable icon-left ion-calendar">Née le {{ inputBirthDate | date:'dd - MMMM - yyyy' }}</button>
+		          </ionic-datepicker>
+		          <label class="item item-input item-select">
+				    <div class="input-label">
+				      Sexe
+				    </div>
+				    <select ng-model="inputGender">
+				      <option>M</option>
+				      <option>F</option>
+				    </select>
+				  </label>
 				  <label class="item item-input item-floating-label">
 				    <span class="input-label">Password</span>
 				    <input type="password" ng-model="inputPwd" name="password" placeholder="password">
 				  </label>
 				  <label class="item item-input item-floating-label">
 				    <span class="input-label">Confirm password</span>
-				    <input type="password" ng-model="inputConfirmPwd" name="password" placeholder="password">
+				    <input type="password" ng-model="inputConfirmPwd" name="password" placeholder="confirm password">
 				  </label>
 				</div>				
-				<button type="submit" class="button button-full button-positive">
+				<button type="submit" class="button button-full button-positive" ng-click="signIn()">
 				  Sign in
 				</button>
     		</form>
@@ -59,6 +73,12 @@
 			 	Use an existing account
 			</button>
     	</div>
-    	
+   	  </div>
+
+      <div ng-show="connected">
+      	<button class="button button-full button-calm" ng-click="logOut()">
+		 	Log Out
+		</button>
+      </div>
     </ion-content>
   </ion-modal-view>
